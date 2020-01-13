@@ -1,4 +1,59 @@
+<main [class.dark-theme]="isDarkTheme">
 
-<p>
-  Start editing to see some magic happen :)
-</p>
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span>{{ title }}</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+
+    <button mat-icon-button [mat-menu-trigger-for]="themeMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" opened>
+      <mat-nav-list>
+        <mat-list-item routerLink="/home" routerLinkActive="active">
+          <mat-icon>home</mat-icon> Home
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/products" routerLinkActive="active">
+          <mat-icon>shopping_cart</mat-icon> Products
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/products/data" routerLinkActive="active">
+          <mat-icon>shopping_cart</mat-icon> Products Data
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/contact" routerLinkActive="active">
+          <mat-icon>local_phone</mat-icon> Contact
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item routerLink="/admin" routerLinkActive="active">
+          <mat-icon>security</mat-icon> Admin
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-card>
+        <router-outlet></router-outlet>
+      </mat-card>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <footer>
+    <a href="http://www.angularacademy.ca" taget="_blank">www.angularacademy.ca</a> 2020 (using Angular v{{ngVersion}}
+    and Material v{{matVersion}})
+  </footer>
+
+  <mat-menu #themeMenu x-position="before">
+    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+  </mat-menu>
+
+</main>

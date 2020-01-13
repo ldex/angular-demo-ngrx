@@ -1,1 +1,14 @@
-/* Add application styles & imports to this file! */
+html, body {
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+  }
+  
+  .mat-card {
+    margin: 20px;
+    padding: 0;
+  }
+  
+  .mat-card h2 {
+    margin-top: 0;
+  }

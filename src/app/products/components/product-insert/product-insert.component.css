@@ -1,0 +1,20 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+}
+
+.section-row .mat-checkbox {
+  margin-right: 15px;
+}
+
+.mat-raised-button {
+  width: 180px;
+}

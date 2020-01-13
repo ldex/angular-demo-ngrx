@@ -1,3 +1,22 @@
-p {
-  font-family: Lato;
+main {
+  height: 100% !important;
+}
+
+.mat-sidenav-container {
+  height: 85%;
+}
+
+.mat-sidenav-content {
+  display: block !important;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+footer {
+  font-size: 8pt;
+  text-align: right;
 }

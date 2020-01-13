@@ -1,1 +1,94 @@
-<my-app>loading</my-app>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Angular NgRx Store</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- inline styles to display and animate loading spinner right away -->
+  <style type="text/css">
+    body,
+    html {
+      height: 100%;
+    }
+
+    .app-loading .logo {
+      height: 75px;
+      width: 75px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .app-loading .spinner {
+      height: 200px;
+      width: 200px;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .app-loading .spinner .path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: #ddd;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <app-root>
+
+    <!-- loading layout replaced by app after startup -->
+    <div class="app-loading">
+      <div class="logo">
+        <img
+          src="data:image/png;base64,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"
+          alt="Angular Academy Logo">
+      </div>
+      <svg class="spinner" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+      </svg>
+    </div>
+
+  </app-root>
+</body>
+
+</html>
