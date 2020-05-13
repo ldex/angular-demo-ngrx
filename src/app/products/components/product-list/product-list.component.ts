@@ -23,8 +23,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     isLoading: boolean = false;
     subscription: Subscription;
 
-    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-    @ViewChild(MatSort, { static: false }) sort: MatSort;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
     title: string = "Products";
     products$: Observable<Product[]>;

@@ -20,7 +20,7 @@ export class ProductDetailComponent implements OnInit {
   product$: Observable<Product>;
   productSub: Subscription;
 
-  @ViewChild('dialog', { static: false }) dialogTemplate: TemplateRef<any>;
+  @ViewChild('dialog') dialogTemplate: TemplateRef<any>;
 
   constructor(
     private dialog: MatDialog,
