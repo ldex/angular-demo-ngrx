@@ -46,7 +46,7 @@ const initialState: RouterReducerState<RouterStateUrl> = {
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     StoreModule.forFeature(ROUTER_FEATURE_KEY, routerReducer, { initialState }),
     StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer,
       stateKey: ROUTER_FEATURE_KEY,
