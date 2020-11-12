@@ -18,7 +18,7 @@ import { EntityDataModule, DefaultDataServiceConfig } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 
 const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'http://storerestservice.azurewebsites.net/api',
+  root: 'http://storerestservice.azurewebsites.net/api/',
   timeout: 3000, // request timeout
 }
 
