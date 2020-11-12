@@ -6,7 +6,7 @@ import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { loadProducts, loadProductsSuccess, loadProductsFailure, deleteProduct, deleteProductSuccess, deleteProductFailure } from './product.actions';
 import { ProductService } from './services';
 import { Product } from './models/product.model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 

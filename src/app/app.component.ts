@@ -1,5 +1,4 @@
 import { Component, VERSION as ngVersion } from '@angular/core';
-import { VERSION as matVersion } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +8,6 @@ import { VERSION as matVersion } from '@angular/material';
 export class AppComponent {
   title: string = 'Angular NgRx Store';
   ngVersion: string = ngVersion.full;
-  matVersion: string = matVersion.full;
+  VERSION
   isDarkTheme: boolean = false;
 }

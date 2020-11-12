@@ -15,6 +15,7 @@ import * as fromProduct from './product.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products.effects';
 import { ProductDataComponent } from '@app/products/components/product-data/product-data.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ProductDataComponent } from '@app/products/components/product-data/prod
         FormsModule,
         ReactiveFormsModule,
         //ProductsRoutingModule,
+        RouterModule,
         MyMaterialModule,
         StoreModule.forFeature(fromProduct.productsFeatureKey, fromProduct.reducer),
         EffectsModule.forFeature([ProductsEffects]),
