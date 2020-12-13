@@ -38,7 +38,7 @@ const productReducer = createReducer(
   ),
   on(ProductActions.loadProductsSuccess,
     (state, action) => ({
-      ...adapter.addAll(action.products, state),
+      ...adapter.setAll(action.products, state),
       loading: false,
       error: null
     })
