@@ -1,10 +1,19 @@
 # Angular Demo NgRx
 
-Demo Project part of <a href="https://angular.ac" target="_blank">Angular Academy Workshop</a>.
+Demo Project for an <a href="https://angular.ac" target="_blank">Angular Academy Workshop</a>.
 
-## Try it live in Stackblitz without installation!
+[![Angular Academy](https://www.angularacademy.ca/images/classroom.jpg "Angular Academy")](https://www.angularacademy.ca)
 
-<a href="https://stackblitz.com/github/ldex/angular-demo-ngrx" target="_blank">Angular Demo NgRx</a>
+Angular Academy is a world-class hands-on instructor-led Angular training provider.  
+We have a long history of <a href="https://www.angularacademy.ca/world-firsts" target="_blank">World Firsts</a>...
+
+Visit www.angularacademy.ca for our list of Angular related courses:
+* Angular Fundamentals
+* Advanced Angular
+* RxJS Workshop
+* Angular Architecture
+* Testing Angular
+
 
 ## Local installation
 
