@@ -8,7 +8,9 @@ import {
   Validators
 } from '@angular/forms';
 
-import { ProductService } from '@app/products/services/';
+import { Store } from '@ngrx/store';
+import { ProductState } from '@app/products/product.reducer';
+import { addProduct } from '@app/products/product.actions';
 
 @Component({
   selector: 'app-product-insert',
@@ -25,22 +27,25 @@ export class ProductInsertComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService,
-    private router: Router,
+    private store: Store<ProductState>,
     private snackBar: MatSnackBar) { }
 
   onSubmit() {
-    let newProduct = this.insertForm.value;
-    this.productService
-      .insertProduct(newProduct)
-      .subscribe(
-        product => {
-          this.ConfirmAndLog(`Product ${product.name} saved.`);
-          this.productService.resetList();
-          this.router.navigateByUrl("/products");
-        },
-        error => this.ConfirmAndLog('Could not delete product. ' + error)
-      );
+    this.store.dispatch(addProduct({product:this.insertForm.value}));
+
+
+    // BEFORE NGRX
+    //
+    // this.productService
+    //   .insertProduct(newProduct)
+    //   .subscribe(
+    //     product => {
+    //       this.ConfirmAndLog(`Product ${product.name} saved.`);
+    //       this.productService.resetList();
+    //       this.router.navigateByUrl("/products");
+    //     },
+    //     error => this.ConfirmAndLog('Could not delete product. ' + error)
+    //   );
   }
 
   ngOnInit() {

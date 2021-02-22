@@ -1,12 +1,11 @@
-import { Router } from "@angular/router";
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
-import { ProductService, FavouriteService } from "@app/products/services/";
+import { FavouriteService } from "@app/products/services/";
 import { Store } from '@ngrx/store';
 import { ProductState } from '@app/products/product.reducer';
 import { loadProducts } from '@app/products/product.actions';
@@ -23,29 +22,19 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     displayedColumns = ['id', 'name', 'description', 'price'];
     dataSource: MatTableDataSource<Product> = new MatTableDataSource();
     isLoading: boolean = false;
-    subscription: Subscription;
+    title: string = "Products";
+    products$: Observable<Product[]>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    title: string = "Products";
-    products$: Observable<Product[]>;
-
-    onSelect(product: Product): void {
-        this.router.navigateByUrl("/products/" + product.id);
-    }
-
-    get favourites(): number {
-        return this.favouriteService.getFavouritesNb();
-    }
-
     constructor(
         private store: Store<ProductState>,
-        private favouriteService: FavouriteService,
-        private router: Router) { }
+        private favouriteService: FavouriteService) { }
 
     ngOnInit() {
 
+        // Get isLoading indicator from the Store
         this
             .store
             .select(selectors.isProductsLoading)
@@ -53,6 +42,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
                 isLoading => this.isLoading = isLoading
             )
 
+        // Get products from the Store
         this
             .store
             .select(selectors.selectAllProducts)
@@ -61,10 +51,14 @@ export class ProductListComponent implements OnInit, AfterViewInit {
                 error => console.log(error)
             );
 
+        // Load the products
         this
             .store
             .dispatch(loadProducts())
 
+
+        // BEFORE NGRX
+        //
         // this.subscription = this.productService
         //     .products$
         //     .subscribe(
@@ -86,8 +80,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         this.paginator.pageIndex = 0; // reset back to the first page.
     }
 
-    ngOnDestroy() {
-        if (this.subscription)
-            this.subscription.unsubscribe();
+    get favourites(): number {
+        return this.favouriteService.getFavouritesNb();
     }
 }

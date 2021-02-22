@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 import { Product } from './models/product.model';
+import { UpdateNum } from '@ngrx/entity/src/models';
 
 
 export const loadProducts = createAction(
@@ -17,15 +18,38 @@ export const loadProductsFailure = createAction(
   props<{ error: any }>()
 );
 
+
 export const addProduct = createAction(
   '[Product/API] Add Product',
   props<{ product: Product }>()
 );
 
+export const addProductSuccess = createAction(
+  '[Product/API] Add Product Success',
+  props<{ product: Product }>()
+);
+
+export const addProductFailure = createAction(
+  '[Product/API] Add Product Failure',
+  props<{ error: any }>()
+);
+
+
 export const updateProduct = createAction(
   '[Product/API] Update Product',
-  props<{ product: Update<Product> }>()
+  props<{ product: UpdateNum<Product> }>()
 );
+
+export const updateProductSuccess = createAction(
+  '[Product/API] Update Product Success',
+  props<{ product: UpdateNum<Product> }>()
+);
+
+export const updateProductFailure = createAction(
+  '[Product/API] Update Product Failure',
+  props<{ error: any }>()
+);
+
 
 export const deleteProduct = createAction(
   '[Product/API] Delete Product',
@@ -41,6 +65,7 @@ export const deleteProductFailure = createAction(
   '[Product/API] Delete Product Failure',
   props<{ error: any }>()
 );
+
 
 export const clearProducts = createAction(
   '[Product/API] Clear Products'

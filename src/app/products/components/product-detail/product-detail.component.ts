@@ -1,15 +1,15 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
-import { FavouriteService, ProductService } from '@app/products/services/';
+import { FavouriteService } from '@app/products/services/';
 import { Store } from '@ngrx/store';
 import { ProductState } from '@app/products/product.reducer';
 import * as selectors from '@app/products/products.selectors';
 import { deleteProduct } from '@app/products/product.actions';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-detail',
@@ -19,26 +19,19 @@ import { deleteProduct } from '@app/products/product.actions';
 export class ProductDetailComponent implements OnInit {
 
   product$: Observable<Product>;
-  productSub: Subscription;
 
   @ViewChild('dialog') dialogTemplate: TemplateRef<any>;
 
   constructor(
-    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private favouriteService: FavouriteService,
     private store: Store<ProductState>,
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
-  confirmDeleteProduct(id: number) {
-    let dialogRef = this.dialog.open(this.dialogTemplate);
-    dialogRef.afterClosed().subscribe(deleteConfirmed => {
-      if (deleteConfirmed) {
-        this.deleteProduct(id);
-      }
-    });
+  ngOnInit() {
+    this.product$ = this.store.select(selectors.selectCurrentProduct)
   }
 
   deleteProduct(id: number) {
@@ -47,6 +40,10 @@ export class ProductDetailComponent implements OnInit {
       .dispatch(
         deleteProduct({ id })
       )
+
+
+    // BEFORE NGRX
+    //
     // this.productService
     //   .deleteProduct(id)
     //   .subscribe(
@@ -69,19 +66,20 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.product$ = this.store.select(selectors.selectCurrentProduct)
-  }
-
-  goToList(): void {
-    this.router.navigateByUrl("/products");
-  }
-
   ConfirmAndLog(message: string): void {
     this.snackBar.open(message, 'ok', {
       duration: 1200,
     });
     console.log(message);
+  }
+
+  confirmDeleteProduct(id: number) {
+    let dialogRef = this.dialog.open(this.dialogTemplate);
+    dialogRef.afterClosed().subscribe(deleteConfirmed => {
+      if (deleteConfirmed) {
+        this.deleteProduct(id);
+      }
+    });
   }
 
 }

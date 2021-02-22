@@ -12,7 +12,7 @@ export class ProductService {
     public products$: Observable<Product[]>;
 
     constructor(private http: HttpClient) {
-        this.loadProducts();
+        this.initProducts();
     }
 
     deleteProduct(id: number): Observable<any> {
@@ -22,6 +22,11 @@ export class ProductService {
     insertProduct(newProduct: Product): Observable<Product> {
         return this.http.post<Product>(this.baseUrl, newProduct);
     }
+
+    updateProduct(id: number, updatedProduct: Product): Observable<Product> {
+        updatedProduct.id = id;
+        return this.http.put<Product>(this.baseUrl + id, updatedProduct);
+      }
 
     getProductById(id: number): Observable<Product> {
         return this.products$
@@ -33,25 +38,13 @@ export class ProductService {
     }
 
     resetList() {
-        this.loadProducts();
+        this.initProducts();
     }
 
-    // getProducts(): Observable<Product[]> {
-    //     let url: string = this.baseUrl + `?$orderby=ModifiedDate%20desc`;
-    //     return this.http.get<Product[]>(url)
-    //         .pipe(
-    //             //   tap(console.table),
-    //             shareReplay(),
-    //             delay(500),
-    //             catchError(this.handleError)
-    //         );
-    // }
-
-    private loadProducts() {
+    private initProducts(): void {
         let url: string = this.baseUrl + `?$orderby=ModifiedDate%20desc`;
         this.products$ = this.http.get<Product[]>(url)
             .pipe(
-               // tap(console.table),
                 shareReplay(),
                 delay(200),
                 catchError(this.handleError)

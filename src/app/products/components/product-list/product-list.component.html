@@ -19,7 +19,7 @@
   <div class="table-container mat-elevation-z8">
 
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-    
+
     <mat-table [dataSource]="dataSource" matSort>
 
       <!-- ID Column -->
@@ -49,7 +49,7 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"
                [class.discontinued]="row.discontinued"
-               (click)="onSelect(row)">
+               [routerLink]="['/products/' + row.id]">
       </mat-row>
     </mat-table>
 

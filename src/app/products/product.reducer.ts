@@ -7,28 +7,26 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export const productsFeatureKey = 'products';
 
+// Defining the product state /////////////////////////////////////
 export interface ProductState extends EntityState<Product> {
+  // additional state property
   loading: boolean;
   error: HttpErrorResponse;
 }
 
+// Creating the entity adapter /////////////////////////////////////
 export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 
+// Initializing the default state /////////////////////////////////////
 export const defaultProductState = {
   loading: false,
   error: null
 };
-
 export const initialState: ProductState = adapter.getInitialState(defaultProductState);
 
+// Creating the reducer /////////////////////////////////////
 const productReducer = createReducer(
   initialState,
-  on(ProductActions.addProduct,
-    (state, action) => adapter.addOne(action.product, state)
-  ),
-  on(ProductActions.updateProduct,
-    (state, action) => adapter.updateOne(action.product, state)
-  ),
   on(ProductActions.loadProducts,
     state => ({
       ...state,
@@ -43,20 +41,28 @@ const productReducer = createReducer(
       error: null
     })
   ),
+  on(ProductActions.addProductSuccess,
+    (state, action) => adapter.addOne(action.product, state)
+  ),
+  on(ProductActions.updateProductSuccess,
+    (state, action) => adapter.updateOne(action.product, state)
+  ),
   on(ProductActions.deleteProductSuccess,
     (state, action) => adapter.removeOne(action.id, state)
   ),
   on(ProductActions.loadProductsFailure,
     ProductActions.deleteProductFailure,
+    ProductActions.addProductFailure,
+    ProductActions.updateProductFailure,
     (state, action) => ({
       ...state,
       loading: false,
       error: action.error
     })
   ),
-  // on(ProductActions.clearProducts,
-  //   state => adapter.removeAll(state)
-  // ),
+  on(ProductActions.clearProducts,
+    state => adapter.removeAll(state)
+  ),
 );
 
 export function reducer(state: ProductState | undefined, action: Action) {
