@@ -17,7 +17,7 @@ Visit www.angularacademy.ca for our list of Angular related courses:
 
 ## Angular Certifications!
 
-Test your Angular skills, try a certification!
+Test your Angular skills, try a <a href="https://www.angularacademy.ca/angular-certification" target="_blank">Certification</a> exam!
 
 [![Angular Academy](https://www.angularacademy.ca/images/cert.png "Angular Certifications")](https://www.angularacademy.ca/angular-certification)
 
@@ -25,10 +25,11 @@ Test your Angular skills, try a certification!
 ## Local installation
 
 You need to restore the npm dependencies first:
+
 Run `npm i`
 
 ### Run it locally
 
-Run `ng s -o` for a dev server.
+Run `ng s -o --hmr` for a local dev server.
 
-The app is running on `http://localhost:4200/` and will automatically reload if you change any of the source files.
+The app is running on `http://localhost:4200/` and will automatically reload if you change/save any of the source files.
