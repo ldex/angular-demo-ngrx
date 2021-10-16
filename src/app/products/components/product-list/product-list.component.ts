@@ -21,9 +21,9 @@ import * as selectors from '@app/products/products.selectors';
 export class ProductListComponent implements OnInit, AfterViewInit {
     displayedColumns = ['id', 'name', 'description', 'price'];
     dataSource: MatTableDataSource<Product> = new MatTableDataSource();
-    isLoading: boolean = false;
+
     title: string = "Products";
-    products$: Observable<Product[]>;
+    loading$: Observable<boolean>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -33,14 +33,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         private favouriteService: FavouriteService) { }
 
     ngOnInit() {
-
-        // Get isLoading indicator from the Store
-        this
-            .store
-            .select(selectors.isProductsLoading)
-            .subscribe(
-                isLoading => this.isLoading = isLoading
-            )
+        // Get loading indicator from the Store
+        this.loading$ = this
+                            .store
+                            .select(selectors.isProductsLoading);
 
         // Get products from the Store
         this

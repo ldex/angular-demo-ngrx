@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '@app/products/models/product.model';
 import { ProductDataService } from '@app/products/services/product-data.service';
-import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-product-data',
@@ -11,38 +13,41 @@ import { Router } from '@angular/router';
 })
 export class ProductDataComponent implements OnInit {
   displayedColumns = ['id', 'name', 'description', 'price'];
-  loading$: Observable<boolean>;
-  products$: Observable<Product[]>;
-  title = 'Products (with NgRx Data)';
+  dataSource: MatTableDataSource<Product> = new MatTableDataSource();
 
-  constructor(
-    private productDataService: ProductDataService,
-    private router: Router) {
-    this.products$ = productDataService.entities$;
-    this.loading$ = productDataService.loading$;
+  title = 'Products (with NgRx Data)';
+  loading$: Observable<boolean>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private productDataService: ProductDataService) {
   }
 
   ngOnInit() {
-    this.getProducts();
-  }
+    // Get loading indicator from the service
+    this.loading$ = this.productDataService.loading$;
 
-  add(product: Product) {
-    this.productDataService.add(product);
-  }
+    // Get products from the service
+    this.productDataService.entities$.subscribe(
+      data => this.dataSource.data = data,
+      error => console.log(error)
+    );
 
-  delete(product: Product) {
-    this.productDataService.delete(product.id);
-  }
-
-  getProducts() {
+    // Load the products
     this.productDataService.getAll();
   }
 
-  update(product: Product) {
-    this.productDataService.update(product);
-  }
 
-  onSelect(product: Product): void {
-    this.router.navigateByUrl("/products/" + product.id);
-  }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    // If the user changes the sort order, reset back to the first page.
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+}
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
+    this.paginator.pageIndex = 0; // reset back to the first page.
+}
 }

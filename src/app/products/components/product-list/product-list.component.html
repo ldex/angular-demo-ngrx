@@ -18,7 +18,7 @@
 
   <div class="table-container mat-elevation-z8">
 
-    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
 
     <mat-table [dataSource]="dataSource" matSort>
 
