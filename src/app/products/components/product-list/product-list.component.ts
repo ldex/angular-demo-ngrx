@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
-import { FavouriteService } from "@app/products/services/";
 import { Store } from '@ngrx/store';
 import { ProductState } from '@app/products/product.reducer';
 import { loadProducts } from '@app/products/product.actions';
@@ -28,9 +27,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(
-        private store: Store<ProductState>,
-        private favouriteService: FavouriteService) { }
+    constructor(private store: Store<ProductState>) { }
 
     ngOnInit() {
         // Get loading indicator from the Store
@@ -74,9 +71,5 @@ export class ProductListComponent implements OnInit, AfterViewInit {
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
         this.paginator.pageIndex = 0; // reset back to the first page.
-    }
-
-    get favourites(): number {
-        return this.favouriteService.getFavouritesNb();
     }
 }

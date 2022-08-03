@@ -2,9 +2,9 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  UntypedFormControl,
   Validators
 } from '@angular/forms';
 
@@ -19,14 +19,14 @@ import { addProduct } from '@app/products/product.actions';
 })
 export class ProductInsertComponent implements OnInit {
 
-  insertForm: FormGroup;
-  name: FormControl;
-  price: FormControl;
-  description: FormControl;
-  imageUrl: FormControl;
+  insertForm: UntypedFormGroup;
+  name: UntypedFormControl;
+  price: UntypedFormControl;
+  description: UntypedFormControl;
+  imageUrl: UntypedFormControl;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private store: Store<ProductState>,
     private snackBar: MatSnackBar) { }
 
@@ -51,10 +51,10 @@ export class ProductInsertComponent implements OnInit {
   ngOnInit() {
     let validImgUrlRegex: string = '^(https?\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(?:\/\S*)?(?:[-A-Za-z0-9+&@#/%?=~_|!:,.;])+\.(?:jpg|jpeg|gif|png))$';
 
-    this.name = new FormControl('', [Validators.required, Validators.maxLength(50)]);
-    this.price = new FormControl('', [Validators.required, Validators.min(0), Validators.max(10000000)]);
-    this.description = new FormControl('', [Validators.minLength(3), Validators.maxLength(500)]);
-    this.imageUrl = new FormControl('', [Validators.pattern(validImgUrlRegex)]);
+    this.name = new UntypedFormControl('', [Validators.required, Validators.maxLength(50)]);
+    this.price = new UntypedFormControl('', [Validators.required, Validators.min(0), Validators.max(10000000)]);
+    this.description = new UntypedFormControl('', [Validators.minLength(3), Validators.maxLength(500)]);
+    this.imageUrl = new UntypedFormControl('', [Validators.pattern(validImgUrlRegex)]);
 
     this.insertForm = this.fb.group(
       {
