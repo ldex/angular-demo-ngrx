@@ -46,8 +46,9 @@ export class ProductDataComponent implements OnInit {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
-    this.paginator.pageIndex = 0; // reset back to the first page.
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
+  this.paginator.pageIndex = 0; // reset back to the first page.
 }
 }

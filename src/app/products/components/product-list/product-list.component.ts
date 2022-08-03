@@ -40,7 +40,7 @@ export class ProductListComponent implements OnInit, AfterViewInit {
             .store
             .select(selectors.selectAllProducts)
             .subscribe(
-                data => this.dataSource.data = data,
+                (data: Product[]) => this.dataSource.data = data,
                 error => console.log(error)
             );
 
@@ -68,7 +68,8 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     }
 
-    applyFilter(filterValue: string) {
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
         this.paginator.pageIndex = 0; // reset back to the first page.
     }
