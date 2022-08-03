@@ -5,7 +5,7 @@ import {
   StoreRouterConnectingModule,
   routerReducer,
   RouterStateSerializer,
-  RouterReducerState, DefaultRouterStateSerializer,
+  RouterReducerState, FullRouterStateSerializer,
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import {
@@ -48,7 +48,7 @@ const initialState: RouterReducerState<RouterStateUrl> = {
   imports: [
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     StoreModule.forFeature(ROUTER_FEATURE_KEY, routerReducer, { initialState }),
-    StoreRouterConnectingModule.forRoot({ serializer: DefaultRouterStateSerializer,
+    StoreRouterConnectingModule.forRoot({ serializer: FullRouterStateSerializer,
       stateKey: ROUTER_FEATURE_KEY,
     }),
   ],

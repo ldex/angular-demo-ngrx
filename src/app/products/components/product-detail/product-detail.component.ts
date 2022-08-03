@@ -42,11 +42,11 @@ export class ProductDetailComponent implements OnInit {
     //   .deleteProduct(id)
     //   .subscribe(
     //     () => {
-    //       this.ConfirmAndLog('Product deleted.');
+    //       console.log('Product deleted.');
     //       this.productService.resetList();
     //       this.router.navigateByUrl("/products");
     //     },
-    //     error => this.ConfirmAndLog('Could not delete product. ' + error)
+    //     error => console.error('Could not delete product. ' + error)
     //   );
   }
 
