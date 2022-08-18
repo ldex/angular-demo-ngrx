@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
 import { FavouriteService } from "@app/products/services/";
@@ -18,9 +18,11 @@ import * as selectors from '@app/products/products.selectors';
     encapsulation: ViewEncapsulation.Emulated,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
     displayedColumns = ['id', 'name', 'description', 'price'];
     dataSource: MatTableDataSource<Product> = new MatTableDataSource();
+
+    subscription: Subscription = new Subscription();
 
     title: string = "Products";
     loading$: Observable<boolean>;
@@ -39,13 +41,15 @@ export class ProductListComponent implements OnInit, AfterViewInit {
                             .select(selectors.isProductsLoading);
 
         // Get products from the Store
-        this
+        this.subscription.add(
+            this
             .store
             .select(selectors.selectAllProducts)
             .subscribe(
                 data => this.dataSource.data = data,
                 error => console.log(error)
-            );
+            )
+        );
 
         // Load the products
         this
@@ -62,6 +66,10 @@ export class ProductListComponent implements OnInit, AfterViewInit {
         //         error => console.log(error),
         //         () => this.isLoading = false
         //     );
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
     ngAfterViewInit() {
