@@ -5,11 +5,8 @@
 
   <div class="table-header">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
     </mat-form-field>
-    <mat-chip-list>
-      <mat-chip>{favourites, plural, =0 {no favourite} =1 {1 favourite} other {{{favourites}} favourites} }</mat-chip>
-    </mat-chip-list>
     <button mat-raised-button
             color="accent"
             routerLink="/products/insert">

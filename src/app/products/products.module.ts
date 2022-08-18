@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsRoutingModule } from './products-routing.module';
 import { OrderBy } from './orderBy.pipe';
 import { ProductService } from '@app/products/services/product.service';
-import { FavouriteService } from '@app/products/services/favourite.service';
 import { ProductInsertComponent } from '@app/products/components/product-insert/product-insert.component';
 import { ProductListComponent } from '@app/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '@app/products/components/product-detail/product-detail.component';
@@ -39,8 +38,7 @@ import { RouterModule } from '@angular/router';
         ProductDataComponent
     ],
     providers: [
-        ProductService,
-        FavouriteService
+        ProductService
     ],
 })
 export class ProductsModule { }

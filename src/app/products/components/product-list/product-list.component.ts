@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, Subscription } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
-import { FavouriteService } from "@app/products/services/";
 import { Store } from '@ngrx/store';
 import { ProductState } from '@app/products/product.reducer';
 import { loadProducts } from '@app/products/product.actions';
@@ -30,9 +29,7 @@ export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(
-        private store: Store<ProductState>,
-        private favouriteService: FavouriteService) { }
+    constructor(private store: Store<ProductState>) { }
 
     ngOnInit() {
         // Get loading indicator from the Store
@@ -46,7 +43,7 @@ export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
             .store
             .select(selectors.selectAllProducts)
             .subscribe(
-                data => this.dataSource.data = data,
+                (data: Product[]) => this.dataSource.data = data,
                 error => console.log(error)
             )
         );
@@ -79,12 +76,9 @@ export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     }
 
-    applyFilter(filterValue: string) {
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase(); // Defaults to lowercase matches
         this.paginator.pageIndex = 0; // reset back to the first page.
-    }
-
-    get favourites(): number {
-        return this.favouriteService.getFavouritesNb();
     }
 }
