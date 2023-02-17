@@ -32,12 +32,13 @@ export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
     constructor(private store: Store<ProductState>) { }
 
     ngOnInit() {
+
         // Get loading indicator from the Store
         this.loading$ = this
                             .store
                             .select(selectors.isProductsLoading);
 
-        // Get products from the Store
+        // Get products from the Store (when any)
         this.subscription.add(
             this
             .store
@@ -48,10 +49,10 @@ export class ProductListComponent implements OnInit, OnDestroy, AfterViewInit {
             )
         );
 
-        // Load the products
+        // Ask for the products to be loaded
         this
-            .store
-            .dispatch(loadProducts())
+        .store
+        .dispatch(loadProducts())
 
 
         // BEFORE NGRX

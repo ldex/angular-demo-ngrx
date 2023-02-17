@@ -9,7 +9,5 @@ import { Product } from '../models/product.model';
 export class ProductDataService extends EntityCollectionServiceBase<Product> {
   constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
     super('Product', serviceElementsFactory);
-
-
   }
 }
