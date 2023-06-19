@@ -45,7 +45,7 @@ export class ProductStoreComponent implements OnInit, AfterViewInit {
         // Ask for the products to be loaded
         this
         .productStore
-        .getProducts();
+        .loadProducts();
 
     }
 

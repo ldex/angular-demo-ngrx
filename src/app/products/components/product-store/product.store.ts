@@ -49,7 +49,7 @@ export class ProductStore extends ComponentStore<ProductState> {
     });
   }
 
-  readonly getProducts = this.effect<void>((trigger$) =>
+  readonly loadProducts = this.effect<void>((trigger$) =>
     trigger$.pipe(
       tap(() => this.setLoading(true)),
       switchMap(() =>
