@@ -12,26 +12,26 @@
     align-items: center;
   }
   
-  .mat-form-field {
+  .mat-mdc-form-field {
     font-size: 14px;
     width: 50%;
   }
   
-  .mat-table {
+  .mat-mdc-table {
     overflow: auto;
     max-height: 500px;
   }
   
-  .mat-row.discontinued > .mat-cell {
+  .mat-mdc-row.discontinued > .mat-mdc-cell {
     color: red !important;
   }
   
-  .mat-row:hover {
+  .mat-mdc-row:hover {
     cursor: pointer;
     background-color: yellow;
   }
   
-  .mat-row:hover .mat-cell {
+  .mat-mdc-row:hover .mat-mdc-cell {
     color: rgb(0, 0, 0) !important;
   } 
   

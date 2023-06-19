@@ -22,16 +22,18 @@ import { ProductListComponent } from '@app/products/components/product-list/prod
 import { ProductDetailComponent } from '@app/products/components/product-detail/product-detail.component';
 import { ProductInsertComponent } from '@app/products/components/product-insert/product-insert.component';
 import { ProductDataComponent } from '@app/products/components/product-data/product-data.component';
+import { ProductStoreComponent } from '@app/products/components/product-store/product-store.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch:'full' },
   { path: 'home', component: HomeComponent },
-  // { path:'products', loadChildren: 
+  // { path:'products', loadChildren:
   //       () => import('../products/products.module')
   //             .then(m => m.ProductsModule) },
   { path: 'contact', component: ContactComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'products', component: ProductListComponent },
+  { path: 'products/store', component: ProductStoreComponent },
   { path: 'products/insert', component: ProductInsertComponent },
   { path: 'products/data', component: ProductDataComponent },
   { path: 'products/:id', component: ProductDetailComponent },

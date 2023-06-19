@@ -1,4 +1,4 @@
-<main [class.dark-theme]="isDarkTheme">
+<main [class.light-theme]="isLightTheme">
 
   <mat-toolbar color="primary">
     <button mat-icon-button (click)="sidenav.toggle()">
@@ -31,6 +31,10 @@
           <mat-icon>shopping_cart</mat-icon> Products Data
         </mat-list-item>
         <mat-divider></mat-divider>
+        <mat-list-item routerLink="/products/store" routerLinkActive="active">
+          <mat-icon>shopping_cart</mat-icon> Products Store
+        </mat-list-item>
+        <mat-divider></mat-divider>
         <mat-list-item routerLink="/contact" routerLinkActive="active">
           <mat-icon>local_phone</mat-icon> Contact
         </mat-list-item>
@@ -41,7 +45,7 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-card>
+      <mat-card appearance="outlined">
         <router-outlet></router-outlet>
       </mat-card>
     </mat-sidenav-content>
@@ -52,7 +56,7 @@
   </footer>
 
   <mat-menu #themeMenu x-position="before">
-    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+    <button mat-menu-item (click)="isLightTheme = !isLightTheme">Toggle Theme</button>
   </mat-menu>
 
 </main>

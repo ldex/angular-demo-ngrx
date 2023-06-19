@@ -4,11 +4,11 @@ html, body {
     height: 100%;
   }
   
-  .mat-card {
+  .mat-mdc-card {
     margin: 20px;
     padding: 0;
   }
   
-  .mat-card h2 {
+  .mat-mdc-card h2 {
     margin-top: 0;
   }

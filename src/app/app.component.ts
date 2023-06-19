@@ -8,5 +8,5 @@ import { Component, VERSION as ngVersion } from '@angular/core';
 export class AppComponent {
   title: string = 'Angular NgRx Store';
   ngVersion: string = ngVersion.full;
-  isDarkTheme: boolean = false;
+  isLightTheme: boolean = false;
 }

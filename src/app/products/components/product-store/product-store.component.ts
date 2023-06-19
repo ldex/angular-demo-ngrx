@@ -1,45 +1,42 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
-import { Store } from '@ngrx/store';
-import { ProductState } from '@app/products/product.reducer';
-import { loadProducts } from '@app/products/product.actions';
-import * as selectors from '@app/products/products.selectors';
+import { ProductState, ProductStore } from './product.store';
 
 @Component({
-    selector: 'app-product-list',
-    templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.css'],
-    encapsulation: ViewEncapsulation.Emulated,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-product-store',
+    templateUrl: './product-store.component.html',
+    styleUrls: ['./product-store.component.css']
 })
-export class ProductListComponent implements OnInit, AfterViewInit {
+export class ProductStoreComponent implements OnInit, AfterViewInit {
     displayedColumns = ['id', 'name', 'description', 'price'];
     dataSource: MatTableDataSource<Product> = new MatTableDataSource();
 
-    title: string = "Products";
+    title: string = "Products (with ComponentStore)";
     loading$: Observable<boolean>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private store: Store<ProductState>) { }
+    constructor(
+        private readonly productStore: ProductStore
+        ) { }
 
     ngOnInit() {
 
-        // Get loading indicator from the Store
+        // Get loading indicator from the Component Store
         this.loading$ = this
-                            .store
-                            .select(selectors.isProductsLoading);
+                            .productStore
+                            .loading$;
 
-        // Get products from the Store (when any)
+        // Get products from the Component Store (when any)
         this
-        .store
-        .select(selectors.selectAllProducts)
+        .productStore
+        .products$
         .subscribe(
             (data: Product[]) => this.dataSource.data = data,
             error => console.log(error)
@@ -47,19 +44,9 @@ export class ProductListComponent implements OnInit, AfterViewInit {
 
         // Ask for the products to be loaded
         this
-        .store
-        .dispatch(loadProducts())
+        .productStore
+        .getProducts();
 
-
-        // BEFORE NGRX
-        //
-        // this.subscription = this.productService
-        //     .products$
-        //     .subscribe(
-        //         data => this.dataSource.data = data,
-        //         error => console.log(error),
-        //         () => this.isLoading = false
-        //     );
     }
 
     ngAfterViewInit() {

@@ -15,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products.effects';
 import { ProductDataComponent } from '@app/products/components/product-data/product-data.component';
 import { RouterModule } from '@angular/router';
+import { ProductStoreComponent } from './components/product-store/product-store.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { RouterModule } from '@angular/router';
         ProductListComponent,
         ProductInsertComponent,
         OrderBy,
-        ProductDataComponent
+        ProductDataComponent,
+        ProductStoreComponent
     ],
     providers: [
         ProductService

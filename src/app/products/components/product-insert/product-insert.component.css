@@ -11,10 +11,10 @@ form {
   height: 60px;
 }
 
-.section-row .mat-checkbox {
+.section-row .mat-mdc-checkbox {
   margin-right: 15px;
 }
 
-.mat-raised-button {
+.mat-mdc-raised-button {
   width: 180px;
 }
