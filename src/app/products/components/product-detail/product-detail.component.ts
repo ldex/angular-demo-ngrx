@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Observable } from 'rxjs';
 
 import { Product } from '@app/products/models/product.model';
@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { ProductState } from '@app/products/product.reducer';
 import * as selectors from '@app/products/products.selectors';
 import { deleteProduct } from '@app/products/product.actions';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
   selector: 'app-product-detail',
