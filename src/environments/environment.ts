@@ -7,5 +7,5 @@ export const environment = {
 };
 
 export const config = {
-  baseUrl: "http://storerestservice.azurewebsites.net/api/products/"
+  baseUrl: "https://retoolapi.dev/U1A9pK/products/"
 };

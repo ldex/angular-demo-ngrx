@@ -21,7 +21,6 @@ import { ErrorComponent } from '@app/shared/components/error.component';
 import { ProductListComponent } from '@app/products/components/product-list/product-list.component';
 import { ProductDetailComponent } from '@app/products/components/product-detail/product-detail.component';
 import { ProductInsertComponent } from '@app/products/components/product-insert/product-insert.component';
-import { ProductDataComponent } from '@app/products/components/product-data/product-data.component';
 import { ProductStoreComponent } from '@app/products/components/product-store/product-store.component';
 
 const routes: Routes = [
@@ -35,7 +34,6 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/store', component: ProductStoreComponent },
   { path: 'products/insert', component: ProductInsertComponent },
-  { path: 'products/data', component: ProductDataComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', redirectTo:'/error?reason=NavError' }

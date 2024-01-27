@@ -13,7 +13,6 @@ import { StoreModule } from '@ngrx/store';
 import * as fromProduct from './product.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductsEffects } from './products.effects';
-import { ProductDataComponent } from '@app/products/components/product-data/product-data.component';
 import { RouterModule } from '@angular/router';
 import { ProductStoreComponent } from './components/product-store/product-store.component';
 
@@ -36,7 +35,6 @@ import { ProductStoreComponent } from './components/product-store/product-store.
         ProductListComponent,
         ProductInsertComponent,
         OrderBy,
-        ProductDataComponent,
         ProductStoreComponent
     ],
     providers: [

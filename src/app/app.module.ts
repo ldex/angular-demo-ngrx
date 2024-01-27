@@ -14,14 +14,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RoutingModule } from './router/routing.module';
 import { ProductsModule } from './products/products.module';
 
-import { EntityDataModule, DefaultDataServiceConfig } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
-
-const defaultDataServiceConfig: DefaultDataServiceConfig = {
-  root: 'http://storerestservice.azurewebsites.net/api/',
-  timeout: 3000, // request timeout
-}
-
 @NgModule({
   declarations: [
     AppComponent
@@ -44,10 +36,9 @@ const defaultDataServiceConfig: DefaultDataServiceConfig = {
       name: 'NgRx Products Store App',
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig)
+    EffectsModule.forRoot([])
   ],
-  providers: [{ provide: DefaultDataServiceConfig, useValue: defaultDataServiceConfig }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
